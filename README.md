@@ -1,13 +1,18 @@
 Project Name: Random Quran Question Generation
 Course: Algorithm Analysis & Design
+
 Submitted by:
 
 [محمود وجيه محمد السيد] SEC 7
+
 [مروان نبيل محمد مطاوع] SEC 8
+
 [نور سعد عبد الفتاح العدروسي] SEC 9
+
 [يحيي عادل محمد] SEC 9
 
 Project Description:
+
 This project addresses the problem of selecting N testing points (Ayahs) from the Holy Quran
 for revision purposes (Murajah), ensuring fairness and coverage.
 
@@ -28,3 +33,4 @@ Files Included:
 - Naive_Algorithm.cpp : C++ source code for the Naive approach.
 - Optimized_Algorithm.cpp : C++ source code for the Optimized approach.
 - README.md : This file.
+
