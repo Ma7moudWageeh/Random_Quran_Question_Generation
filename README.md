@@ -34,3 +34,5 @@ Files Included:
 - Optimized_Algorithm.cpp : C++ source code for the Optimized approach.
 - README.md : This file.
 
+This algorithm analysis references and was inspired by:
+[n-jah/Hafiz_Alquran](https://github.com/n-jah/Hafiz_Alquran)
