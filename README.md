@@ -8,6 +8,8 @@ Submitted by:
 
 [مروان نبيل محمد مطاوع] SEC 8
 
+[ملك محمود متولي الجيزاوي] SEC 
+
 [نور سعد عبد الفتاح العدروسي] SEC 9
 
 [يحيي عادل محمد] SEC 9
@@ -37,4 +39,5 @@ Files Included:
 
 This algorithm analysis references and was inspired by:
 [n-jah/Hafiz_Alquran](https://github.com/n-jah/Hafiz_Alquran)
+
 
