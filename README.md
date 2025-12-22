@@ -21,6 +21,7 @@ for revision purposes (Muraja'ah), ensuring fairness and coverage.
 
 We implemented two algorithms using Real Quran Data to solve this:
 
+
 1- Naive Algorithm (Naive_Algorithm.cpp):
 Uses simple random sampling with a linear collision check.
 Performance: Inefficient (O(N^2)). It becomes significantly slower as N increases and produces unfair clusters of questions (overlapping).
@@ -28,6 +29,7 @@ Performance: Inefficient (O(N^2)). It becomes significantly slower as N increase
 2- Optimized Algorithm (Optimized_Algorithm.cpp):
 Uses stratified sampling with a lookup table for Juz indices.
 Performance: Efficient (O(N)). It guarantees that the revision covers the selected Quranic range fairly without gaps or overlaps.
+
 
 Files Included:
 
@@ -39,6 +41,8 @@ Optimized_Algorithm.cpp : C++ source code for the Optimized approach (O(N)).
 
 README.md : This file.
 
+
 This algorithm analysis references and was inspired by:
 n-jah/Hafiz_Alquran
+
 
