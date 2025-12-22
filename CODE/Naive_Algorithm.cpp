@@ -2,13 +2,16 @@
  * Algorithm 1: Naive Random Sampling (Real Quran Data)
  * Context: Selects questions from ACTUAL Quranic Ayah indices.
  * Data Source: Standard Madani Mushaf counts (Total 6236 Ayahs).
- * Logic: Naive Selection (O(N^2)) - Picks blindly from the full range.
+ * Logic: 
+ * 1. Naive Selection (O(N^2)): Picks blindly and checks duplicates linearly.
+ * 2. Sorting (O(N log N)): Sorts the final list before displaying (Extra Overhead).
  */
 
 #include <iostream>
 #include <vector>
 #include <random>  // Modern random library
 #include <ctime>   // For time()
+#include <algorithm> // For sort()
 
 using namespace std;
 
@@ -67,20 +70,22 @@ vector<int> generateRandomNaive(int startAyah, int endAyah, int N, int versesPer
     vector<int> result;
     int totalRange = endAyah - startAyah + 1;
 
-    if (N > totalRange) {
+    if ((N * versesPerQuestion) > totalRange) {
         cout << "Error: Range too small." << endl;
         return result;
     }
     
     // Modern Random Setup
-    std::mt19937 rng(time(0)); 
-    std::uniform_int_distribution<int> dist(startAyah, endAyah);
+    mt19937 rng(time(0)); 
+    uniform_int_distribution<int> dist(startAyah, endAyah);
 
+    cout << "Generating questions..." << endl;
+
+    // 1. Generation Phase (O(N^2))
     while (result.size() < N) {
-        // 1. Pick a random Ayah from the FULL range
         int value = dist(rng);
 
-        // 2. INEFFICIENT CHECK (O(N^2)) - Linear search for EXACT duplicates
+        // Linear search for duplicates
         bool exists = false;
         for (int i = 0; i < result.size(); i++) {
             if (result[i] == value) {
@@ -89,17 +94,25 @@ vector<int> generateRandomNaive(int startAyah, int endAyah, int N, int versesPer
             }
         }
 
-        // 3. Add if unique
         if (!exists) {
             result.push_back(value);
-            
-            int recitationEnd = value + versesPerQuestion;
-            
-            // Clean Output: Just the question details
-            cout << "Question " << result.size() << ": "
-                 << "Ayah " << value << " to " << recitationEnd << endl;
         }
     }
+
+    // 2. Sorting Phase (O(N log N))
+    // We sort the questions to appear in order
+    // This is an extra step required because Naive selection is chaotic
+    sort(result.begin(), result.end());
+
+    // 3. Display Phase
+    for (int i = 0; i < result.size(); i++) {
+        int value = result[i];
+        int recitationEnd = value + versesPerQuestion;
+        
+        cout << "Question " << (i + 1) << ": "
+             << "Ayah " << value << " to " << recitationEnd << endl;
+    }
+
     return result;
 }
 
