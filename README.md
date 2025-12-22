@@ -35,6 +35,7 @@ We implemented two algorithms using Real Quran Data to solve this:
 Files Included:
 
 
+
 - Random Quran Question Generation.pdf : The complete analysis, pseudocode, and results discussion.
 
 - Naive_Algorithm.cpp : C++ source code for the Naive approach (Modified to be O(N^2) for comparison).
@@ -46,6 +47,7 @@ Files Included:
 
 This algorithm analysis references and was inspired by:
 [n-jah/Hafiz_Alquran](https://github.com/n-jah/Hafiz_Alquran)
+
 
 
 
