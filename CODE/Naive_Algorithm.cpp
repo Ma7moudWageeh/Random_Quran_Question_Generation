@@ -1,5 +1,5 @@
 /*
- * Algorithm 1: Naive Random Sampling (Real Quran Data)
+ * Algorithm 1: Naive Random Sampling (Real Quran Data)0
  * Context: Selects questions from ACTUAL Quranic Ayah indices.
  * Data Source: Standard Madani Mushaf counts (Total 6236 Ayahs).
  * Logic: 
@@ -68,9 +68,9 @@ int getEndAyahOfJuz(int juz) {
 // The Naive Function
 vector<int> generateRandomNaive(int startAyah, int endAyah, int N, int versesPerQuestion) {
     vector<int> result;
-    int totalRange = endAyah - startAyah + 1;
+    int totalRange = endAyah - startAyah + 1; // Cost: 1
 
-    if ((N * versesPerQuestion) > totalRange) {
+    if (N > totalRange) {
         cout << "Error: Range too small." << endl;
         return result;
     }
@@ -81,37 +81,48 @@ vector<int> generateRandomNaive(int startAyah, int endAyah, int N, int versesPer
 
     cout << "Generating questions..." << endl;
 
-    // 1. Generation Phase (O(N^2))
-    while (result.size() < N) {
-        int value = dist(rng);
+    // --- PHASE 1: GENERATION (O(N^2)) ---
+    // Explanation: The outer loop runs N times.
+    // The inner loop runs 0, 1, 2, ..., N-1 times (Arithmetic Progression).
+    // Sum = N * (N - 1) / 2  => O(N^2).
 
-        // Linear search for duplicates
-        bool exists = false;
-        for (int i = 0; i < result.size(); i++) {
-            if (result[i] == value) {
-                exists = true;
-                break;
+    while (result.size() < N) {                   // Frequency: N + 1 (Checks condition)
+        
+        int value = dist(rng);                    // Frequency: N
+        bool exists = false;                      // Frequency: N
+
+        // Inner Loop: Linear Search for duplicates
+        // This is the cause of the quadratic complexity.
+        for (int i = 0; i < result.size(); i++) { // Frequency: Sum(1 to N) approx (N^2)/2
+            
+            if (result[i] == value) {             // Frequency: Sum(1 to N) approx (N^2)/2
+                exists = true;                    // Frequency: O(1) (Only on collision)
+                break;                            // Frequency: O(1)
             }
         }
 
-        if (!exists) {
-            result.push_back(value);
+        if (!exists) {                            // Frequency: N
+            result.push_back(value);              // Frequency: N
         }
     }
 
-    // 2. Sorting Phase (O(N log N))
-    // We sort the questions to appear in order
-    // This is an extra step required because Naive selection is chaotic
-    sort(result.begin(), result.end());
+    // --- PHASE 2: SORTING (O(N log N)) ---
+    // Explanation: Standard sort algorithm is typically Introsort.
+    sort(result.begin(), result.end());           // Cost: O(N log N)
 
-    // 3. Display Phase
-    for (int i = 0; i < result.size(); i++) {
-        int value = result[i];
-        int recitationEnd = value + versesPerQuestion;
+    // --- PHASE 3: DISPLAY (O(N)) ---
+    // Explanation: Simple iteration to print N items.
+    for (int i = 0; i < result.size(); i++) {     // Frequency: N + 1
+        
+        int value = result[i];                    // Frequency: N
+        int recitationEnd = value + versesPerQuestion; // Frequency: N
         
         cout << "Question " << (i + 1) << ": "
-             << "Ayah " << value << " to " << recitationEnd << endl;
+             << "Ayah " << value << " to " << recitationEnd << endl; // Frequency: N
     }
+
+    // Total Complexity = O(N^2) + O(N log N) + O(N)
+    // Dominant Term = O(N^2)
 
     return result;
 }
